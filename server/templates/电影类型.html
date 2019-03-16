@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
+    <meta name="author" content="GeeksLabs">
+    <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
+    <link rel="shortcut icon" href="/static/img/favicon.png">
+
+    <title>电影大数据——电影类型</title>
+
+	 <!-- 引入 echarts.js -->
+    <script src="/static/js/echarts.js"></script>
+    <script src="/static/js/world.js"></script>
+    <script src="/static/jquery.js"></script>
+    <!-- Bootstrap CSS -->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <!-- bootstrap theme -->
+    <link href="/static/css/bootstrap-theme.css" rel="stylesheet">
+    <!--external css-->
+    <!-- font icon -->
+    <link href="/static/css/elegant-icons-style.css" rel="stylesheet" />
+    <link href="/static/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- Custom styles -->
+    <link href="/static/css/style.css" rel="stylesheet">
+    <link href="/static/css/style-responsive.css" rel="stylesheet" />
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
+    <!--[if lt IE 9]>
+      <script src="/static/js/html5shiv.js"></script>
+      <script src="/static/js/respond.min.js"></script>
+      <script src="/static/js/lte-ie7.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+  <!-- container section start -->
+  <section id="container" class="">
+      <!--header start-->
+         <header class="header dark-bg">
+      <div class="toggle-nav">
+        <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"></div>
+      </div>
+      <!--logo start-->
+      <a href="index.html" class="logo">电影大数据</a>
+      <!--logo end-->
+      <div class="nav search-row" id="top_menu">
+        <!--  search form start -->
+        <ul class="nav top-menu">
+          <li>
+            <form class="navbar-form">
+</form>
+          </li>
+          <strong><img src="/static/img/icon.png" width="30" height="30" alt=""/></strong>
+        </ul>
+        <!--  search form end -->
+      </div>
+      <div class="top-nav notification-row">
+        <!-- notificatoin dropdown start-->        <!-- notificatoin dropdown end-->
+      </div>
+    </header>
+    <!--header end-->
+
+      <!--sidebar start-->
+      <aside>
+        <div id="sidebar"  class="nav-collapse ">
+          <!-- sidebar menu start-->
+          <ul class="sidebar-menu">
+            <li class="active"> <a class="" href="/"> <i><img src="/static/img/电影推荐.png" width="25" height="25" alt=""/></i> <span>电影推荐</span> </a> </li>
+            <li class="sub-menu"> <a href="javascript:;" class=""> <i><img src="/static/img/电影地区.png" width="25" height="25" alt=""/></i> <span>电影地区</span> <span class="menu-arrow arrow_carrot-right"></span></a>
+              <ul class="sub">
+                <li> <a class="" href="地区特征"> <i><img src="/static/img/地区特征.png" width="25" height="25" alt=""/></i> <span>地区特征</span></a></li>
+                <li> <a class="" href="电影统计"> <i><img src="/static/img/电影统计.png" width="25" height="25" alt=""/></i> <span>电影统计</span></a></li>
+              </ul>
+            </li>
+            <li class="sub-menu"> <a href="javascript:;" class=""> <i><img src="/static/img/电影时间.png" width="25" height="25" alt=""/></i> <span>电影时间</span> <span class="menu-arrow arrow_carrot-right"></span></a>
+              <ul class="sub">
+                <li> <a class="" href="电影年代"> <i><img src="/static/img/电影年代.png" width="25" height="25" alt=""/></i> <span>电影年代</span></a></li>
+                <li> <a class="" href="年代特征"> <i><img src="/static/img/年代特征.png" width="25" height="25" alt=""/></i> <span>年代特征</span></a></li>
+              </ul>
+            </li>
+            <li class="sub-menu"> <a href="javascript:;" class=""> <i><img src="/static/img/电影人物.png" width="25" height="25" alt=""/></i> <span>电影人物</span> <span class="menu-arrow arrow_carrot-right"></span></a>
+              <ul class="sub">
+                <li> <a class="" href="演员热度"> <i><img src="/static/img/演员热度.png" width="25" height="25" alt=""/></i> <span>演员热度</span></a></li>
+                <li> <a class="" href="吸金导演"> <i><img src="/static/img/吸金导演.png" width="25" height="25" alt=""/></i> <span>吸金导演</span></a></li>
+              </ul>
+            </li>
+            <li> <a class="" href="电影类型"> <i><img src="/static/img/电影类型.png" width="25" height="25" alt=""/></i> <span>电影类型</span></a></li>
+          </ul>
+          <!-- sidebar menu end-->
+        </div>
+      </aside>
+      <!--sidebar end-->
+      <!--main content start-->
+      <section id="main-content">
+        <div class="row">
+          <section>此处为新 div 标签的内容</section>
+          <p> 此</p>
+          <p>内</p>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <h3 class="page-header"><i><img src="/static/img/电影类型.png" width="25" height="25" alt=""/></i> 电影类型</h3>
+</div>
+          <div>
+			  <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+        	  <div id="main" style="width: 1200px;height:600px;"></div>
+        	  <script type="text/javascript">
+        	  // 基于准备好的dom，初始化echarts实例
+        	  var myChart = echarts.init(document.getElementById('main'));
+        	  // 指定图表的配置项和数据
+              var value = [];
+               $.ajax({
+            url: "/handle10",
+            type: "GET",
+            data: {test: $("#textLine").val()},
+            dataType: "json",
+                   async: false,
+            success: function (jsonStr) {
+                if (jsonStr) {
+                    for (var i = 0; i < jsonStr.length; i++) {
+                        value[i] = jsonStr[i].value;    //挨个取出类别并填入类别数组
+                    }
+                }
+
+            }
+        });
+			  var option = {
+    baseOption: {
+        timeline: {
+            axisType: 'category',
+            autoPlay: true,
+            playInterval: 3000,
+            controlPosition:'righ',
+            bottom:'20%',
+            data: ['2013', '2014', '2015', '2016', '2017', '2018', '2019' ]
+        },
+        title: [
+        {
+          text: '近年电影\n类型总票房',
+          textAlign:'middle',
+		  left: "24.7%",
+		  top: "47.5%",
+        },
+        {
+          text: '近年电影\n想看人数',
+          textAlign:'middle',
+		  left: "74.7%",
+		top: "47.5%",
+        },
+        ],
+        tooltip: {},
+        legend: {
+            left:"center",
+        bottom:'10%',
+        data:['剧情','喜剧','爱情','动作','惊悚','动画','冒险','科幻','灾难','悬疑','文艺','其他']
+        },
+        series: [{
+            name:'电影部数及占比',
+            type:'pie',
+            radius: ['20%', '30%'],
+            center: ['25%', '50%'],
+            label: {
+                normal: {
+                    formatter: ' {b|{b}：}{c}亿元  {per|{d}%}  ',
+                    rich: {
+                        b: {
+                            fontSize: 16,
+                            lineHeight: 33
+                        },
+                        per: {
+                            color: '#eee',
+                            backgroundColor: '#334455',
+                            padding: [2, 4],
+                            borderRadius: 2
+                        }
+                    }
+                }
+            },
+        },
+        {
+            name:'想看人数',
+            type:'pie',
+            radius: ['20%', '30%'],
+            center: ['75%', '50%'],
+            label: {
+                normal: {
+
+                    formatter: '{b|{b}：}{c}',
+                    rich: {
+                        b: {
+                            fontSize: 16,
+                            lineHeight: 33
+                        },
+                    }
+                }
+            },
+        }
+        ]
+    },
+options: [
+   {
+        series: [
+            {
+            data:[
+                {value:value[0], name:'剧情'},
+                {value:value[7], name:'喜剧'},
+                {value:value[14], name:'爱情'},
+                {value:value[21], name:'动作'},
+                {value:value[28], name:'惊悚'},
+                {value:value[35], name:'动画'},
+                {value:value[42], name:'冒险'},
+                {value:value[49], name:'科幻'},
+                {value:value[56], name:'灾难'},
+                {value:value[63], name:'悬疑'},
+                {value:value[70], name:'文艺'},
+                {value:value[77], name:'其他'}
+                ]
+        },
+        {
+            data: [
+                {value:value[95], name:'剧情'},
+                {value:value[92], name:'喜剧'},
+                {value:value[90], name:'爱情'},
+                {value:value[93], name:'动作'},
+                {value:value[89], name:'惊悚'},
+                {value:value[87], name:'动画'},
+                {value:value[91], name:'冒险'},
+                {value:value[88], name:'科幻'},
+                {value:value[84], name:'灾难'},
+                {value:value[86], name:'悬疑'},
+                {value:value[85], name:'文艺'},
+                {value:value[94], name:'其他'}
+                ]
+        },]
+    },
+    {
+        series: [
+            {
+            data:[
+                {value:value[1], name:'剧情'},
+                {value:value[8], name:'喜剧'},
+                {value:value[15], name:'爱情'},
+                {value:value[22], name:'动作'},
+                {value:value[29], name:'惊悚'},
+                {value:value[34], name:'动画'},
+                {value:value[43], name:'冒险'},
+                {value:value[50], name:'科幻'},
+                {value:value[57], name:'灾难'},
+                {value:value[64], name:'悬疑'},
+                {value:value[71], name:'文艺'},
+                {value:value[78], name:'其他'}
+                ]
+        },
+        {
+            data: [
+                {value:value[95], name:'剧情'},
+                {value:value[92], name:'喜剧'},
+                {value:value[90], name:'爱情'},
+                {value:value[93], name:'动作'},
+                {value:value[89], name:'惊悚'},
+                {value:value[87], name:'动画'},
+                {value:value[91], name:'冒险'},
+                {value:value[88], name:'科幻'},
+                {value:value[84], name:'灾难'},
+                {value:value[86], name:'悬疑'},
+                {value:value[85], name:'文艺'},
+                {value:value[94], name:'其他'}
+                ]
+        },]
+    },
+    {
+        series: [
+            {
+            data:[
+                {value:value[2], name:'剧情'},
+                {value:value[9], name:'喜剧'},
+                {value:value[16], name:'爱情'},
+                {value:value[23], name:'动作'},
+                {value:value[30], name:'惊悚'},
+                {value:value[37], name:'动画'},
+                {value:value[44], name:'冒险'},
+                {value:value[51], name:'科幻'},
+                {value:value[58], name:'灾难'},
+                {value:value[65], name:'悬疑'},
+                {value:value[72], name:'文艺'},
+                {value:value[79], name:'其他'}
+                ]
+        },
+        {
+            data: [
+                {value:value[95], name:'剧情'},
+                {value:value[92], name:'喜剧'},
+                {value:value[90], name:'爱情'},
+                {value:value[93], name:'动作'},
+                {value:value[89], name:'惊悚'},
+                {value:value[87], name:'动画'},
+                {value:value[91], name:'冒险'},
+                {value:value[88], name:'科幻'},
+                {value:value[84], name:'灾难'},
+                {value:value[86], name:'悬疑'},
+                {value:value[85], name:'文艺'},
+                {value:value[94], name:'其他'}
+                ]
+        },]
+    },
+    {
+        series: [
+            {
+            data:[
+                {value:value[3], name:'剧情'},
+                {value:value[10], name:'喜剧'},
+                {value:value[17], name:'爱情'},
+                {value:value[24], name:'动作'},
+                {value:value[31], name:'惊悚'},
+                {value:value[38], name:'动画'},
+                {value:value[45], name:'冒险'},
+                {value:value[52], name:'科幻'},
+                {value:value[59], name:'灾难'},
+                {value:value[66], name:'悬疑'},
+                {value:value[73], name:'文艺'},
+                {value:value[80], name:'其他'}
+                ]
+        },
+        {
+            data: [
+                {value:value[95], name:'剧情'},
+                {value:value[92], name:'喜剧'},
+                {value:value[90], name:'爱情'},
+                {value:value[93], name:'动作'},
+                {value:value[89], name:'惊悚'},
+                {value:value[87], name:'动画'},
+                {value:value[91], name:'冒险'},
+                {value:value[88], name:'科幻'},
+                {value:value[84], name:'灾难'},
+                {value:value[86], name:'悬疑'},
+                {value:value[85], name:'文艺'},
+                {value:value[94], name:'其他'}
+                ]
+        },]
+    },
+    {
+        series: [
+            {
+            data:[
+                {value:value[4], name:'剧情'},
+                {value:value[11], name:'喜剧'},
+                {value:value[18], name:'爱情'},
+                {value:value[25], name:'动作'},
+                {value:value[32], name:'惊悚'},
+                {value:value[39], name:'动画'},
+                {value:value[46], name:'冒险'},
+                {value:value[53], name:'科幻'},
+                {value:value[60], name:'灾难'},
+                {value:value[67], name:'悬疑'},
+                {value:value[74], name:'文艺'},
+                {value:value[81], name:'其他'}
+                ]
+        },
+        {
+            data: [
+                {value:value[95], name:'剧情'},
+                {value:value[92], name:'喜剧'},
+                {value:value[90], name:'爱情'},
+                {value:value[93], name:'动作'},
+                {value:value[89], name:'惊悚'},
+                {value:value[87], name:'动画'},
+                {value:value[91], name:'冒险'},
+                {value:value[88], name:'科幻'},
+                {value:value[84], name:'灾难'},
+                {value:value[86], name:'悬疑'},
+                {value:value[85], name:'文艺'},
+                {value:value[94], name:'其他'}
+                ]
+        },]
+    },
+    {
+        series: [
+            {
+            data:[
+                {value:value[5], name:'剧情'},
+                {value:value[12], name:'喜剧'},
+                {value:value[19], name:'爱情'},
+                {value:value[26], name:'动作'},
+                {value:value[33], name:'惊悚'},
+                {value:value[40], name:'动画'},
+                {value:value[47], name:'冒险'},
+                {value:value[54], name:'科幻'},
+                {value:value[61], name:'灾难'},
+                {value:value[68], name:'悬疑'},
+                {value:value[75], name:'文艺'},
+                {value:value[82], name:'其他'}
+                ]
+        },
+        {
+            data: [
+                {value:value[95], name:'剧情'},
+                {value:value[92], name:'喜剧'},
+                {value:value[90], name:'爱情'},
+                {value:value[93], name:'动作'},
+                {value:value[89], name:'惊悚'},
+                {value:value[87], name:'动画'},
+                {value:value[91], name:'冒险'},
+                {value:value[88], name:'科幻'},
+                {value:value[84], name:'灾难'},
+                {value:value[86], name:'悬疑'},
+                {value:value[85], name:'文艺'},
+                {value:value[94], name:'其他'}
+                ]
+        },]
+    },
+    {
+        series: [
+            {
+            data:[
+                {value:value[6], name:'剧情'},
+                {value:value[13], name:'喜剧'},
+                {value:value[20], name:'爱情'},
+                {value:value[27], name:'动作'},
+                {value:value[34], name:'惊悚'},
+                {value:value[41], name:'动画'},
+                {value:value[48], name:'冒险'},
+                {value:value[55], name:'科幻'},
+                {value:value[62], name:'灾难'},
+                {value:value[69], name:'悬疑'},
+                {value:value[76], name:'文艺'},
+                {value:value[83], name:'其他'}
+                ]
+        },
+        {
+            data: [
+                {value:value[95], name:'剧情'},
+                {value:value[92], name:'喜剧'},
+                {value:value[90], name:'爱情'},
+                {value:value[93], name:'动作'},
+                {value:value[89], name:'惊悚'},
+                {value:value[87], name:'动画'},
+                {value:value[91], name:'冒险'},
+                {value:value[88], name:'科幻'},
+                {value:value[84], name:'灾难'},
+                {value:value[86], name:'悬疑'},
+                {value:value[85], name:'文艺'},
+                {value:value[94], name:'其他'}
+                ]
+        },]
+    }
+    ]
+};
+		// 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+      </script>
+
+		  </div>
+        </div>
+</section>
+      <!--main content end-->
+  </section>
+  <!-- container section end -->
+    <!-- javascripts -->
+    <script src="/static/js/jquery.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <!-- nicescroll -->
+    <script src="/static/js/jquery.scrollTo.min.js"></script>
+    <script src="/static/js/jquery.nicescroll.js" type="text/javascript"></script>
+    <!--custome script for all page-->
+    <script src="/static/js/scripts.js"></script>
+
+
+  </body>
+</html>

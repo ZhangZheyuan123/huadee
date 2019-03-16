@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test_type_area</title>
+    <script src="/static/jquery.js"></script>
+</head>
+<body>
+<input id="textLine" type="text" value="发送的数据" name="testname">
+<input id="btnGet" type="button" value="发送GET请求">
+<input id="btnPost" type="button" value="发送POST请求">
+
+<script>
+    $("#btnGet").on("click", function () {
+        $.ajax({
+            {#javascript规定只有当协议，主机名以及端口一致的时候才允许互相访问，这就是同源策略（浏览器最核心也是最基本的安全保证）#}
+            {#解决跨域问题的三种方式:前台添加代理，使用JSONP，后端添加响应头允许跨域并且指定允许操作类型#}
+            url: "/handle",
+            type: "GET",
+            data: {test: $("#textLine").val()},
+            dataType: "json",
+            success: function (jsonStr) {
+                $.each(jsonStr, function (index, item) {
+                    //循环获取数据
+                    var type = jsonStr[index].huadee_type;
+                    var box = jsonStr[index].huadee_box;
+                    console.log(type+":"+box)
+                });
+            }
+        });
+    });
+    $("#btnPost").on("click", function () {
+        alert("这是post按钮的响应");
+    });
+</script>
+
+</body>
+</html>

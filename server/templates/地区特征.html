@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
+    <meta name="author" content="GeeksLabs">
+    <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
+
+    <title>电影大数据——地区特征</title>
+
+	 <!-- 引入 echarts.js -->
+    <script src="/static/js/echarts.js"></script>
+    <script src="/static/js/world.js"></script>
+    <script src="/static/jquery.js"></script>
+    <!-- Bootstrap CSS -->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <!-- bootstrap theme -->
+    <link href="/static/css/bootstrap-theme.css" rel="stylesheet">
+    <!--external css-->
+    <!-- font icon -->
+    <link href="/static/css/elegant-icons-style.css" rel="stylesheet" />
+    <link href="/static/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- Custom styles -->
+    <link href="/static/css/style.css" rel="stylesheet">
+    <link href="/static/css/style-responsive.css" rel="stylesheet" />
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
+    <!--[if lt IE 9]>
+      <script src="/static/js/html5shiv.js"></script>
+      <script src="/static/js/respond.min.js"></script>
+      <script src="/static/js/lte-ie7.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+  <!-- container section start -->
+  <section id="container" class="">
+      <!--header start-->
+         <header class="header dark-bg">
+      <div class="toggle-nav">
+        <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"></div>
+      </div>
+      <!--logo start-->
+      <a href="index.html" class="logo">电影大数据</a>
+      <!--logo end-->
+      <div class="nav search-row" id="top_menu">
+        <!--  search form start -->
+        <ul class="nav top-menu">
+          <li>
+            <form class="navbar-form">
+</form>
+          </li>
+          <strong><img src="/static/img/icon.png"width="30" height="30" alt=""/></strong>
+        </ul>
+        <!--  search form end -->
+      </div>
+      <div class="top-nav notification-row">
+        <!-- notificatoin dropdown start-->        <!-- notificatoin dropdown end-->
+      </div>
+    </header>
+    <!--header end-->
+
+      <!--sidebar start-->
+      <aside>
+        <div id="sidebar"  class="nav-collapse ">
+          <!-- sidebar menu start-->
+          <ul class="sidebar-menu">
+            <li class="active"> <a class="" href="/"> <i><img src="/static/img/电影推荐.png" width="25" height="25" alt=""/></i> <span>电影推荐</span> </a> </li>
+            <li class="sub-menu"> <a href="javascript:;" class=""> <i><img src="/static/img/电影地区.png" width="25" height="25" alt=""/></i> <span>电影地区</span> <span class="menu-arrow arrow_carrot-right"></span></a>
+              <ul class="sub">
+                <li> <a class="" href="地区特征"> <i><img src="/static/img/地区特征.png" width="25" height="25" alt=""/></i> <span>地区特征</span></a></li>
+                <li> <a class="" href="电影统计"> <i><img src="/static/img/电影统计.png" width="25" height="25" alt=""/></i> <span>电影统计</span></a></li>
+              </ul>
+            </li>
+            <li class="sub-menu"> <a href="javascript:;" class=""> <i><img src="/static/img/电影时间.png" width="25" height="25" alt=""/></i> <span>电影时间</span> <span class="menu-arrow arrow_carrot-right"></span></a>
+              <ul class="sub">
+                <li> <a class="" href="电影年代"> <i><img src="/static/img/电影年代.png" width="25" height="25" alt=""/></i> <span>电影年代</span></a></li>
+                <li> <a class="" href="年代特征"> <i><img src="/static/img/年代特征.png" width="25" height="25" alt=""/></i> <span>年代特征</span></a></li>
+              </ul>
+            </li>
+            <li class="sub-menu"> <a href="javascript:;" class=""> <i><img src="/static/电影人物.png" width="25" height="25" alt=""/></i> <span>电影人物</span> <span class="menu-arrow arrow_carrot-right"></span></a>
+              <ul class="sub">
+                <li> <a class="" href="演员热度"> <i><img src="/static/img/演员热度.png" width="25" height="25" alt=""/></i> <span>演员热度</span></a></li>
+                <li> <a class="" href="吸金导演"> <i><img src="/static/img/吸金导演.png" width="25" height="25" alt=""/></i> <span>吸金导演</span></a></li>
+              </ul>
+            </li>
+            <li> <a class="" href="电影类型"> <i><img src="/static/img/电影类型.png" width="25" height="25" alt=""/></i> <span>电影类型</span></a></li>
+          </ul>
+          <!-- sidebar menu end-->
+        </div>
+      </aside>
+      <!--sidebar end-->
+      <!--main content start-->
+      <section id="main-content">
+        <div class="row">
+          <section>此处为新 div 标签的内容</section>
+          <p> 此</p>
+          <p>内</p>
+        </div>
+        <div class="row col-lg-12">
+          <div class="col-lg-12">
+            <h3 class="page-header"><i><img src="/static/img/地区特征.png" width="25" height="25" alt=""/></i> 地区特征</h3>
+</div>
+          <div class="col-lg-12">
+			  <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+        	  <div id="main" style="width: 1200px;height:600px;"></div>
+        	  <script type="text/javascript">
+        	  // 基于准备好的dom，初始化echarts实例
+        	  var myChart = echarts.init(document.getElementById('main'));
+        	  // 指定图表的配置项和数据
+              var value = [];
+               $.ajax({
+            url: "/handle_area",
+            type: "GET",
+            data: {test: $("#textLine").val()},
+            dataType: "json",
+                   async: false,
+            success: function (jsonStr) {
+                if (jsonStr) {
+                    for (var i = 0; i < jsonStr.length; i++) {
+                        value[i] = jsonStr[i].value;    //挨个取出类别并填入类别数组
+                    }
+                }
+
+            }
+        });
+               var value1 = [];
+               $.ajax({
+            url: "/handle_area1",
+            type: "GET",
+            data: {test: $("#textLine").val()},
+            dataType: "json",
+                   async: false,
+            success: function (jsonStr) {
+                if (jsonStr) {
+                    for (var i = 0; i < jsonStr.length; i++) {
+                        value1[i] = jsonStr[i].value;    //挨个取出类别并填入类别数组
+                    }
+                }
+
+            }
+        });
+			  var option = {
+    title: {
+        text: '主要国家近年发行影片类型数',
+		left: 10
+    },
+    legend: {
+        data:['中国','美国','英国','法国','俄罗斯','日本','德国','印度','韩国','意大利','巴西','加拿大','澳大利亚','西班牙','墨西哥'],
+
+    selected: {
+    '中国': true,'美国': true,'英国': true,'法国': true,'俄罗斯': true,'日本': false,'德国': false,'印度': false,'韩国': false,'意大利': false,'巴西': false,'加拿大': false,'澳大利亚': false,'西班牙': false,'墨西哥': false
+              },
+    top: 20
+    },
+
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'shadow'
+        }
+    },
+    toolbox: {
+        show: true,
+        orient: 'vertical',
+        right: '15',
+        top: 'center',
+        feature: {
+            mark: {show: true},
+            dataView: {show: true, readOnly: false},
+            magicType: {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+            restore: {show: true},
+            saveAsImage: {show: true}
+        }
+    },
+
+    xAxis: [
+        {
+            type: 'category',
+            axisTick: {show: false},
+            data: ['冒险','剧情','动作','动画','喜剧','悬疑','惊悚','文艺','灾难','爱情','科幻']
+        }
+    ],
+    yAxis: [
+        {
+            type: 'value'
+        }
+    ],
+
+    series: [
+        {
+            name: '中国',
+            type: 'bar',
+            barGap: 0,
+            data: [value[0], value[1], value[2], value[3], value[4], value[5], value[6], value[7], value[8], value[9],
+                value[10]]
+        },
+        {
+            name: '美国',
+            type: 'bar',
+            data: [value[11], value[12], value[13], value[14], value[15], value[16], value[17], value[18], value[19],
+                value[20], value[21]]
+        },
+        {
+            name: '英国',
+            type: 'bar',
+            data: [value[22], value[23], value[24], value[25], value[26], value[27], value[28], value[29], value[30],
+            value[31], value[32]]
+        },
+        {
+            name: '法国',
+            type: 'bar',
+            data: [value[33], value[34], value[35], value[36], value[37], value[38], value[39], value[40], value[41],
+            value[42], value[43]]
+        },
+        {
+            name: '俄罗斯',
+            type: 'bar',
+            data: [value[44], value[45], value[46], value[47], value[48], value[49], value[50], value[51], value[52],
+            value[53], value[54]]
+        },
+        {
+            name: '日本',
+            type: 'bar',
+            data: [value[55], value[56], value[57], value[58], value[59], value[60], value[61], value[62], value[63],
+            value[64], value[65]]
+        },
+        {
+            name: '德国',
+            type: 'bar',
+            data: [value[66], value[67], value[68], value[69], value[70], value[71], value[72], value[73], value[74],
+            value[75], value[76]]
+        },
+        {
+            name: '印度',
+            type: 'bar',
+            data: [value[77], value[78], value[79], value[80], value[81], value[82], value[83], value[84], value[85],
+            value[86], value[87]]
+        },
+        {
+            name: '韩国',
+            type: 'bar',
+            data: [value[88], value[89], value[90], value[91], value[92], value[93], value[94], value[95], value[96],
+            value[97], value[98]]
+        },
+        {
+            name: '意大利',
+            type: 'bar',
+            data: [value[99], value[100], value[101], value[102], value[103], value[104], value[105], value[106],
+                value[107], value[108], value[109]]
+        },
+        {
+            name: '巴西',
+            type: 'bar',
+            data: [value[110], value[111], value[112], value[113], value[114], value[115], value[116], value[117],
+                value[118], value[119], value[120]]
+        },
+        {
+            name: '加拿大',
+            type: 'bar',
+            data: [value[121], value[122], value[123], value[124], value[125], value[126], value[127], value[128],
+                value[129], value[130], value[131]]
+        },
+        {
+            name: '澳大利亚',
+            type: 'bar',
+             data: [value[132], value[133], value[134], value[135], value[136], value[137], value[138], value[139],
+                value[140], value[141], value[142]]
+        },
+        {
+            name: '西班牙',
+            type: 'bar',
+             data: [value[143], value[144], value[145], value[146], value[147], value[148], value[149], value[150],
+                value[151], value[152], value[153]]
+        },
+        {
+            name: '墨西哥',
+            type: 'bar',
+             data: [value[154], value[155], value[156], value[157], value[158], value[159], value[160], value[161],
+                value[162], value[163], value[164]]
+        }
+    ]
+};
+
+
+		// 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+      </script>
+
+		  </div>
+          <div class="col-lg-12">
+            <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+            <div id="main2" style="width: 1200px;height:600px;"></div>
+            <script type="text/javascript">
+        	  // 基于准备好的dom，初始化echarts实例
+        	  var myChart = echarts.init(document.getElementById('main2'));
+        	  // 指定图表的配置项和数据
+			  var option = {
+    title: {
+        text: '主要国家近年发行影片类型票房',
+		left: 10
+    },
+    legend: {
+        data:['中国','美国','英国','法国','俄罗斯','日本','德国','印度','韩国','意大利','巴西','加拿大','澳大利亚','西班牙','墨西哥'],
+
+    selected: {
+    '中国': true,'美国': true,'英国': true,'法国': true,'俄罗斯': true,'日本': false,'德国': false,'印度': false,'韩国': false,'意大利': false,'巴西': false,'加拿大': false,'澳大利亚': false,'西班牙': false,'墨西哥': false
+              },
+    top: 20
+    },
+
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'shadow'
+        }
+    },
+    toolbox: {
+        show: true,
+        orient: 'vertical',
+        left: 'right',
+        top: 'center',
+        feature: {
+            mark: {show: true},
+            dataView: {show: true, readOnly: false},
+            magicType: {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+            restore: {show: true},
+            saveAsImage: {show: true}
+        }
+    },
+
+    xAxis: [
+        {
+            type: 'category',
+            axisTick: {show: false},
+            data: ['冒险','剧情','动作','动画','喜剧','悬疑','惊悚','文艺','灾难','爱情','科幻']
+        }
+    ],
+    yAxis: [
+        {
+            type: 'value'
+        }
+    ],
+
+    series: [
+        {
+            name: '中国',
+            type: 'bar',
+            barGap: 0,
+            data: [value1[0], value1[1], value1[2], value1[3], value1[4], value1[5], value1[6], value1[7], value1[8], value1[9],
+                value1[10]]
+        },
+        {
+            name: '美国',
+            type: 'bar',
+            data: [value1[11], value1[12], value1[13], value1[14], value1[15], value1[16], value1[17], value1[18], value1[19],
+                value1[20], value1[21]]
+        },
+        {
+            name: '英国',
+            type: 'bar',
+            data: [value1[22], value1[23], value1[24], value1[25], value1[26], value1[27], value1[28], value1[29], value1[30],
+            value1[31], value1[32]]
+        },
+        {
+            name: '法国',
+            type: 'bar',
+            data: [value1[33], value1[34], value1[35], value1[36], value1[37], value1[38], value1[39], value1[40], value1[41],
+            value1[42], value1[43]]
+        },
+        {
+            name: '俄罗斯',
+            type: 'bar',
+            data: [value1[44], value1[45], value1[46], value1[47], value1[48], value1[49], value1[50], value1[51], value1[52],
+            value1[53], value1[54]]
+        },
+        {
+            name: '日本',
+            type: 'bar',
+            data: [value1[55], value1[56], value1[57], value1[58], value1[59], value1[60], value1[61], value1[62], value1[63],
+            value1[64], value1[65]]
+        },
+        {
+            name: '德国',
+            type: 'bar',
+            data: [value1[66], value1[67], value1[68], value1[69], value1[70], value1[71], value1[72], value1[73], value1[74],
+            value1[75], value1[76]]
+        },
+        {
+            name: '印度',
+            type: 'bar',
+            data: [value1[77], value1[78], value1[79], value1[80], value1[81], value1[82], value1[83], value1[84], value1[85],
+            value1[86], value1[87]]
+        },
+        {
+            name: '韩国',
+            type: 'bar',
+            data: [value1[88], value1[89], value1[90], value1[91], value1[92], value1[93], value1[94], value1[95], value1[96],
+            value1[97], value1[98]]
+        },
+        {
+            name: '意大利',
+            type: 'bar',
+            data: [value1[99], value1[100], value1[101], value1[102], value1[103], value1[104], value1[105], value1[106],
+                value1[107], value1[108], value1[109]]
+        },
+        {
+            name: '巴西',
+            type: 'bar',
+            data: [value1[110], value1[111], value1[112], value1[113], value1[114], value1[115], value1[116], value1[117],
+                value1[118], value1[119], value1[120]]
+        },
+        {
+            name: '加拿大',
+            type: 'bar',
+            data: [value1[121], value1[122], value1[123], value1[124], value1[125], value1[126], value1[127], value1[128],
+                value1[129], value1[130], value1[131]]
+        },
+        {
+            name: '澳大利亚',
+            type: 'bar',
+             data: [value1[132], value1[133], value1[134], value1[135], value1[136], value1[137], value1[138], value1[139],
+                value1[140], value1[141], value1[142]]
+        },
+        {
+            name: '西班牙',
+            type: 'bar',
+             data: [value1[143], value1[144], value1[145], value1[146], value1[147], value1[148], value1[149], value1[150],
+                value1[151], value1[152], value1[153]]
+        },
+        {
+            name: '墨西哥',
+            type: 'bar',
+             data: [value1[154], value1[155], value1[156], value1[157], value1[158], value1[159], value1[160], value1[161],
+                value1[162], value1[163], value1[164]]
+        }
+    ]
+};
+
+
+		// 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+            </script>
+          </div>
+        </div>
+</section>
+      <!--main content end-->
+  </section>
+  <!-- container section end -->
+    <!-- javascripts -->
+    <script src="/static/js/jquery.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <!-- nicescroll -->
+    <script src="/static/js/jquery.scrollTo.min.js"></script>
+    <script src="/static/js/jquery.nicescroll.js" type="text/javascript"></script>
+    <!--custome script for all page-->
+    <script src="/static/js/scripts.js"></script>
+
+
+  </body>
+</html>
